@@ -1,0 +1,969 @@
+Q1. Clone the Car Booking System repository to your eclipse software from the URL below and execute the project by changing the required changes in the POM.xml file and make it a successful build.									 -40 Marks
+URL https://github.com/anujyog1/carrepo.git
+1.	Resolve dependencies using pom.xml 				-10 Marks
+2.	Build the project to generate the WAR/JAR file 			- 8 Marks
+3.	Verify the generated artifact in the target/ folder 			- 2 Marks
+4.	Solve the given scenario based questions.		           [10 x 2 marks = 20 Marks]
+a.	A teammate sends a .patch file for a bug fix. How would you apply it and include it in your Maven build?
+b.	You are required to change the default build output directory from target/ to build_output/. How would you configure it?
+c.	How does Maven resolve dependency conflicts when two libraries use different versions of the same dependency, and how can you view and manage the dependency tree?
+d.	What command do you use to build a WAR file in Maven, where is it generated, and how can you deploy it to a server like Apache Tomcat?
+e.	How can you create an executable JAR with a main method using Maven, and which plugin helps configure this behavior?
+f.	You need to build the carrepo JAR file quickly for a local demonstration, but running the full test suite takes too long. What flag do you append to mvn package to compile and package the app while completely skipping test execution?
+g.	Your carrepo application throws a class conflict at runtime. You want to see the full list of all direct and transitive dependencies Maven resolved for the build. What simple Maven command prints the entire dependency tree in your terminal?
+h.	You use Java version 17 in multiple places inside pom.xml. To avoid changing the version in multiple lines whenever you upgrade, you want to define it once centrally. You use Java version 17 in multiple places inside pom.xml. To avoid changing the version in multiple lines whenever you upgrade, you want to define it once centrally.
+i.	carrepo is deployed onto an external Apache Tomcat server that already includes Servlet API libraries. You want Maven to use the Servlet API for local compilation, but not package it into the final WAR file. Which <scope> should you set for the Servlet dependency in pom.xml?
+j.	You need to know where Maven stores downloaded JAR files on your local developer machine. Where are they saved by default, and how can you clear them if they get corrupted?
+
+Q2. Git and GitHub 									- 40 Marks
+Task: Work with Git and GitHub as follows: To open git in eclipse right click on project -> show in local terminal -> Git bash
+1.	Initialize a Git repository and add above Maven project files		 	- 5 Marks
+2.	Set global config, and Push your Maven project to GitHub 			- 5 Marks
+3.	How do you set up a new local branch named feature/engine-update that tracks a new remote branch of the same name, and push your initial commit to GitHub?                    - 4 Marks
+4.	You are in the middle of editing CarController.java with incomplete code on your local machine. Suddenly, a critical bug is reported on main that needs to be fixed immediately. You cannot commit your incomplete work yet. How do you temporarily save your work, switch to main, apply a hotfix, and then return to your unfinished work?            - 6 Marks                               
+5.	Solve the given scenario based questions.		           [10 x 2 marks = 20 Marks]	
+a.	How do you include the forgotten file and fix the commit message without creating a second cluttering commit?
+b.	How do you move your uncommitted changes over to feature-login without losing anything or dirtying main?
+c.	You and a teammate both edited the same line in login.jsp. When you attempt to run git merge feature-user, Git halts and reports a conflict. How do you resolve this?
+d.	You modified app.js, but your changes broke everything and you want to throw them away and reset the file back to how it was in the last commit. How do you discard changes to a File?
+e.	You accidentally ran git add secret.env and staged it for commit, but you don't want to commit it yet. You haven't run git commit yet. How do you do unstaging of files?
+f.	You’ve been working for an hour and forgot which exact lines of code you added or modified before staging them. How do you check?
+g.	You want to switch from feature branch to main, but you aren't sure which branch you are currently on. How will you check and go to main branch?
+h.	You want to quickly check the last 4 commits without seeing a wall of complex text cluttering your terminal. Which git command will you use to check?
+i.	Your teammate pushed new updates to the remote main branch, and you need to get those updates onto your local machine. Next apply your changes and push it back. How do you do this?
+j.	You finished merging your bugfix branch into main and now want to clean up and delete the local bugfix branch. How do you do? Specify git command if you want to force-delete it.
+
+Q3. Containerize your Maven project using Docker                                                 – 20 Marks
+1.	Dockerfile Creation  								  - 3 Marks
+o	Ensure it copies the WAR/JAR and runs on Tomcat.
+2.	Image Building  and run  							 - 4 Marks
+3.	Push to Docker Hub								 – 5 Marks
+o	Tag and push the created image to your Docker Hub account.
+4.	Scenario Based Questions		[ 8 x 1 mark = 8 Marks ]
+a.	Which two Docker commands will allow you to (1) inspect stdout logs and (2) open an interactive terminal session inside the running container? 
+b.	What single safety-checked Docker command can you run to clear out all stopped containers, unused networks, and dangling images at once?
+c.	How do you creates and starts a container named my-redis from the redis image.
+d.	How do you opens the Redis command-line tool (redis-cli) inside the container and come out of it.
+e.	Your application is running inside Docker, but you’re not sure if the container is active.
+Which command helps you check running containers?
+f.	You want to run your car_app container and expose its internal port 5000 on host port 8080. Which command should you use?
+g.	You built an car_app image but forgot to tag it. How do you tag it now?
+h.	Assume your car_app container is running, but you want to go inside and debug it using a shell. What CLI command helps you enter the container’s shell? How to Control or Limit RAM in Docker?
+Give me the  commands and theory answer if needded to excute and all should be in one only with question and answer
+
+
+Q1. Maven / Car Booking System
+Repository URL: `https://github.com/anujyog1/carrepo.git`
+
+Q1. Clone the Car Booking System repository and build it successfully
+Step 1: Clone the repository
+git clone https://github.com/anujyog1/carrepo.git
+cd carrepo
+
+In Eclipse:
+
+File → Import → Maven → Existing Maven Projects → Browse to carrepo → Finish
+
+Step 2: Resolve dependencies
+Make sure Maven is installed and Java is configured.
+
+mvn clean install
+
+Or, in Eclipse:
+
+Right-click project → Maven → Update Project → Check “Force Update of Snapshots/Releases” → OK
+
+Maven reads pom.xml, downloads the required dependencies, compiles the source code, runs tests, and packages the application.
+
+If the project requires a particular Java version, configure it in pom.xml, for example:
+
+<properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+</properties>
+
+Step 3: Build WAR/JAR
+For a normal Maven package:
+
+mvn clean package
+
+If it is a WAR project:
+
+mvn clean package
+
+The generated file will normally be:
+
+target/carrepo.war
+
+For a JAR project:
+
+target/carrepo.jar
+
+Step 4: Verify the artifact
+ls target
+
+Windows CMD:
+
+dir target
+
+You should see the generated .war or .jar file.
+
+Q1(a). A teammate sends a .patch file for a bug fix. How would you apply it and include it in your Maven build?
+A Git patch can be applied using:
+
+git apply bugfix.patch
+
+Check the changes:
+
+git diff
+
+Then build the Maven project:
+
+mvn clean package
+
+If the patch is a Git-generated patch containing commit information, use:
+
+git am bugfix.patch
+
+Then:
+
+mvn clean package
+
+Theory: The patch changes the source files; Maven automatically compiles those modified files during the normal build.
+
+Q1(b). Change Maven's default output directory from target/ to build_output/
+Add this inside <build> in pom.xml:
+
+<build>
+    <directory>build_output</directory>
+</build>
+
+Then run:
+
+mvn clean package
+
+The generated files will be placed under:
+
+build_output/
+
+Q1(c). How does Maven resolve dependency conflicts?
+Maven normally uses the nearest definition in the dependency tree. If two dependencies require different versions of the same library, Maven selects the version that is nearest to the project in the dependency graph.
+
+View the dependency tree:
+
+mvn dependency:tree
+
+For more information:
+
+mvn dependency:tree -Dverbose
+
+To manage a version explicitly, define it in pom.xml:
+
+<properties>
+    <some.library.version>2.0.0</some.library.version>
+</properties>
+
+Or use <dependencyManagement>:
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>some-library</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+Q1(d). Build a WAR file and deploy it to Apache Tomcat
+Build:
+
+mvn clean package
+
+The WAR is generated in:
+
+target/carrepo.war
+
+Copy it into Tomcat's webapps directory:
+
+apache-tomcat/webapps/
+
+For example:
+
+cp target/carrepo.war /path/to/tomcat/webapps/
+
+Start Tomcat:
+
+Linux/macOS:
+
+./bin/startup.sh
+
+Windows:
+
+bin\startup.bat
+
+Tomcat deploys the WAR automatically.
+
+Q1(e). Create an executable JAR with a main() method
+Use the Maven JAR Plugin to specify the main class:
+
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <version>3.4.2</version>
+    <configuration>
+        <archive>
+            <manifest>
+                <mainClass>com.example.Main</mainClass>
+            </manifest>
+        </archive>
+    </configuration>
+</plugin>
+
+Then:
+
+mvn clean package
+
+Run:
+
+java -jar target/carrepo.jar
+
+com.example.Main should contain:
+
+public static void main(String[] args) {
+    System.out.println("Car Booking System");
+}
+
+Q1(f). Build quickly while completely skipping tests
+Use:
+
+mvn package -DskipTests
+
+Answer: -DskipTests skips test execution but still compiles the tests.
+
+If you want to skip both test compilation and execution:
+
+mvn package -Dmaven.test.skip=true
+
+For the question's wording “completely skipping test execution”, the expected answer is:
+
+mvn package -DskipTests
+
+Q1(g). Print the complete Maven dependency tree
+mvn dependency:tree
+
+This displays both direct and transitive dependencies.
+
+Q1(h). Define Java version once in pom.xml
+Use a Maven property:
+
+<properties>
+    <java.version>17</java.version>
+</properties>
+
+Then reuse it:
+
+<maven.compiler.source>${java.version}</maven.compiler.source>
+<maven.compiler.target>${java.version}</maven.compiler.target>
+
+Example:
+
+<properties>
+    <java.version>17</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+</properties>
+
+Now upgrading Java requires changing only:
+
+<java.version>17</java.version>
+
+Q1(i). Servlet API should not be packaged into the WAR
+Use:
+
+<scope>provided</scope>
+
+Example:
+
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.1</version>
+    <scope>provided</scope>
+</dependency>
+
+Theory: provided means the dependency is available during compilation but is expected to be supplied by the runtime/server, such as Tomcat.
+
+Q1(j). Where does Maven store downloaded JAR files?
+Maven stores dependencies in the local repository.
+
+Linux/macOS:
+
+~/.m2/repository
+
+Windows:
+
+C:\Users\<username>\.m2\repository
+
+To clear the local Maven repository, you can delete the repository directory.
+
+Linux/macOS:
+
+rm -rf ~/.m2/repository
+
+Windows:
+
+rmdir /s /q "%USERPROFILE%\.m2\repository"
+
+Then rebuild:
+
+mvn clean install
+
+Maven will download the dependencies again.
+
+Q2. Git and GitHub
+Q2.1. Initialize Git and add Maven project files
+Open Git Bash in the project directory:
+
+cd carrepo
+
+Initialize:
+
+git init
+
+Check status:
+
+git status
+
+Add all project files:
+
+git add .
+
+Commit:
+
+git commit -m "Initial commit - Car Booking Maven project"
+
+It is recommended to add a .gitignore:
+
+target/
+build_output/
+.classpath
+.project
+.settings/
+*.class
+
+Then:
+
+git add .gitignore
+git commit -m "Add gitignore"
+
+Q2.2. Set global Git configuration and push to GitHub
+Set username:
+
+git config --global user.name "Your Name"
+
+Set email:
+
+git config --global user.email "your-email@example.com"
+
+Check:
+
+git config --global --list
+
+Create a GitHub repository, then connect the local project:
+
+git remote add origin https://github.com/YOUR_USERNAME/carrepo.git
+
+Rename the branch to main:
+
+git branch -M main
+
+Push:
+
+git push -u origin main
+
+Verify:
+
+git remote -v
+
+Q2.3. Create feature/engine-update, track the remote branch, and push
+Create and switch to the branch:
+
+git switch -c feature/engine-update
+
+Make changes and commit:
+
+git add .
+git commit -m "Update engine functionality"
+
+Push and establish upstream tracking:
+
+git push -u origin feature/engine-update
+
+After this, future pushes can simply use:
+
+git push
+
+Q2.4. Temporarily save incomplete work, fix main, and return
+Check current changes:
+
+git status
+
+Save unfinished work:
+
+git stash push -m "WIP CarController changes"
+
+Switch to main:
+
+git switch main
+
+Get the latest main:
+
+git pull origin main
+
+Create/fix the hotfix:
+
+# edit files
+git add .
+git commit -m "Fix critical production bug"
+
+Push the hotfix:
+
+git push origin main
+
+Return to your feature branch:
+
+git switch feature/engine-update
+
+Restore unfinished work:
+
+git stash pop
+
+Check:
+
+git status
+
+Q2 Scenario-Based Questions
+Q2(a). Include a forgotten file and fix the last commit message without another commit
+If the forgotten file was not included:
+
+git add forgotten-file.java
+
+Amend the previous commit:
+
+git commit --amend -m "Correct commit message"
+
+This changes the previous commit instead of creating a second commit.
+
+If the previous commit was already pushed:
+
+git push --force-with-lease
+
+Use force-pushing carefully on shared branches.
+
+Q2(b). Move uncommitted changes to feature-login without dirtying main
+Stash the changes:
+
+git stash
+
+Switch to the feature branch:
+
+git switch feature-login
+
+Restore the changes:
+
+git stash pop
+
+Now the changes are on feature-login, while main remains clean.
+
+Q2(c). Resolve a merge conflict in login.jsp
+Start the merge:
+
+git merge feature-user
+
+Git reports the conflict.
+
+Check:
+
+git status
+
+Open login.jsp. You may see:
+
+<<<<<<< HEAD
+Your current code
+=======
+Incoming feature-user code
+>>>>>>> feature-user
+
+Manually choose/combine the correct code and remove the conflict markers.
+
+Then:
+
+git add login.jsp
+
+Complete the merge:
+
+git commit -m "Resolve merge conflict in login.jsp"
+
+Verify:
+
+git status
+
+Q2(d). Discard changes to app.js
+For a modified but unstaged file:
+
+git restore app.js
+
+Older Git syntax:
+
+git checkout -- app.js
+
+Warning: This permanently discards the uncommitted changes in that file.
+
+Q2(e). Unstage secret.env
+git restore --staged secret.env
+
+Older syntax:
+
+git reset HEAD secret.env
+
+The file remains modified in your working directory but is no longer staged.
+
+Q2(f). Check exactly what changed before staging
+For unstaged changes:
+
+git diff
+
+For changes that have already been staged:
+
+git diff --staged
+
+To see both working-tree changes and staged changes:
+
+git diff HEAD
+
+Q2(g). Check current branch and switch to main
+Check current branch:
+
+git branch
+
+The current branch has *.
+
+Or:
+
+git status
+
+Switch to main:
+
+git switch main
+
+Older command:
+
+git checkout main
+
+Q2(h). Show the last 4 commits concisely
+git log -4 --oneline
+
+Example:
+
+a123456 Fix login bug
+b234567 Update engine
+c345678 Add booking feature
+d456789 Initial commit
+
+Q2(i). Get teammate's latest main changes, apply your changes, and push
+Switch to main:
+
+git switch main
+
+Download and integrate remote changes:
+
+git pull origin main
+
+If you have local changes on your feature branch, switch to it:
+
+git switch feature/engine-update
+
+Bring the latest main into your branch:
+
+git merge main
+
+Resolve conflicts if necessary, then:
+
+git add .
+git commit -m "Apply latest main changes"
+
+Push:
+
+git push origin feature/engine-update
+
+If your intention is specifically to update main with your completed feature, merge the feature into main:
+
+git switch main
+git pull origin main
+git merge feature/engine-update
+git push origin main
+
+Q2(j). Delete local bugfix branch after merging
+Normal safe deletion:
+
+git branch -d bugfix
+
+Force deletion:
+
+git branch -D bugfix
+
+Difference:
+
+-d
+
+deletes only when Git considers the branch safely merged.
+
+-D
+
+force-deletes it even if it contains unmerged commits.
+
+To delete the remote branch:
+
+git push origin --delete bugfix
+
+Q3. Dockerize the Maven Project
+Q3.1. Create a Dockerfile
+For a Maven project that generates a WAR for Tomcat, create a file named:
+
+Dockerfile
+
+Use:
+
+FROM tomcat:9.0-jdk17
+
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+COPY target/carrepo.war /usr/local/tomcat/webapps/carrepo.war
+
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
+
+First build the WAR:
+
+mvn clean package
+
+Verify:
+
+ls target
+
+You should have:
+
+target/carrepo.war
+
+Then build the Docker image.
+
+Q3.2. Build and run Docker image
+Build:
+
+docker build -t car_app .
+
+Check the image:
+
+docker images
+
+Run:
+
+docker run -d --name car_app -p 8080:8080 car_app
+
+Check running containers:
+
+docker ps
+
+View logs:
+
+docker logs car_app
+
+The application can normally be accessed at:
+
+http://localhost:8080/carrepo/
+
+If the WAR has a different filename/context path, use the corresponding name.
+
+Stop:
+
+docker stop car_app
+
+Start again:
+
+docker start car_app
+
+Remove:
+
+docker rm car_app
+
+Q3.3. Tag and push the image to Docker Hub
+Login:
+
+docker login
+
+Tag the image:
+
+docker tag car_app YOUR_DOCKERHUB_USERNAME/car_app:latest
+
+Push:
+
+docker push YOUR_DOCKERHUB_USERNAME/car_app:latest
+
+Verify:
+
+docker images
+
+A typical image name is:
+
+YOUR_DOCKERHUB_USERNAME/car_app:latest
+
+Q3 Scenario-Based Questions
+Q3(a). Inspect logs and open an interactive terminal inside a running container
+View stdout/stderr logs:
+
+docker logs car_app
+
+Open an interactive shell:
+
+docker exec -it car_app /bin/bash
+
+If Bash is unavailable:
+
+docker exec -it car_app /bin/sh
+
+Q3(b). Remove stopped containers, unused networks, and dangling images
+docker system prune
+
+Docker asks for confirmation before removing the unused resources.
+
+To also remove unused images more aggressively:
+
+docker system prune -a
+
+Expected answer:
+
+docker system prune
+
+Q3(c). Create and start a container named my-redis
+docker run -d --name my-redis redis
+
+Explanation:
+
+-d = detached/background mode
+--name my-redis = container name
+redis = image
+Q3(d). Open redis-cli inside the Redis container and exit
+docker exec -it my-redis redis-cli
+
+Inside Redis CLI, exit with:
+
+exit
+
+or press:
+
+Ctrl+D
+
+Q3(e). Check whether the container is running
+docker ps
+
+To see all containers, including stopped ones:
+
+docker ps -a
+
+Q3(f). Map host port 8080 to container port 5000
+docker run -d --name car_app -p 8080:5000 car_app
+
+Format:
+
+-p HOST_PORT:CONTAINER_PORT
+
+Therefore:
+
+8080:5000
+
+means host port 8080 forwards to container port 5000.
+
+Q3(g). Tag an existing car_app image
+docker tag car_app YOUR_DOCKERHUB_USERNAME/car_app:latest
+
+Verify:
+
+docker images
+
+Then push:
+
+docker push YOUR_DOCKERHUB_USERNAME/car_app:latest
+
+Q3(h). Enter the running car_app container's shell and control RAM
+Enter the container:
+
+docker exec -it car_app /bin/bash
+
+If Bash isn't available:
+
+docker exec -it car_app /bin/sh
+
+Exit:
+
+exit
+
+How to control/limit RAM in Docker
+When creating the container, use --memory:
+
+docker run -d --name car_app --memory=512m car_app
+
+This limits the container to approximately 512 MB RAM.
+
+For example:
+
+docker run -d \
+  --name car_app \
+  --memory=512m \
+  -p 8080:8080 \
+  car_app
+
+For an existing container, Docker also supports:
+
+docker update --memory=512m car_app
+
+Check container resource usage:
+
+docker stats
+
+Quick Command Sheet for Practical Exam
+Maven
+git clone https://github.com/anujyog1/carrepo.git
+cd carrepo
+
+mvn clean
+mvn dependency:tree
+mvn clean package
+mvn clean install
+
+ls target
+
+Skip tests:
+
+mvn package -DskipTests
+
+Change output directory in pom.xml:
+
+<build>
+    <directory>build_output</directory>
+</build>
+
+Git
+git init
+git status
+git add .
+git commit -m "Initial commit"
+
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+git remote add origin https://github.com/YOUR_USERNAME/carrepo.git
+git branch -M main
+git push -u origin main
+
+Branches:
+
+git switch -c feature/engine-update
+git push -u origin feature/engine-update
+
+Stash:
+
+git stash
+git switch main
+git switch feature/engine-update
+git stash pop
+
+Merge:
+
+git merge feature-user
+
+Undo file:
+
+git restore app.js
+
+Unstage:
+
+git restore --staged secret.env
+
+Changes:
+
+git diff
+git diff --staged
+
+Last 4 commits:
+
+git log -4 --oneline
+
+Pull/push:
+
+git pull origin main
+git push origin main
+
+Delete branch:
+
+git branch -d bugfix
+git branch -D bugfix
+
+Docker
+mvn clean package
+
+docker build -t car_app .
+
+docker run -d --name car_app -p 8080:8080 car_app
+
+docker ps
+docker ps -a
+docker logs car_app
+docker exec -it car_app /bin/bash
+
+docker stop car_app
+docker start car_app
+
+docker login
+docker tag car_app YOUR_DOCKERHUB_USERNAME/car_app:latest
+docker push YOUR_DOCKERHUB_USERNAME/car_app:latest
+
+docker system prune
+
+docker run -d --name my-redis redis
+docker exec -it my-redis redis-cli
+
+docker run -d --name car_app --memory=512m -p 8080:8080 car_app
+docker stats
+
+Most important practical sequence for the exam:
+
+git clone https://github.com/anujyog1/carrepo.git
+cd carrepo
+mvn clean package
+ls target
+
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/carrepo.git
+git push -u origin main
+
+docker build -t car_app .
+docker run -d --name car_app -p 8080:8080 car_app
+docker ps
+docker logs car_app
+
+This covers the Maven (40), Git/GitHub (40), and Docker (20) portions in a command-and-theory format suitable for practical execution and written answers.
+
+
+
+Log in for more personalized help with writing, rewriting, and translation.
+
+
+Log in
+
+Sign up for free
+ChatGPT is AI and ca
